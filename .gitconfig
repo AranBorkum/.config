@@ -1,0 +1,3 @@
+[alias]
+	lola = log --graph --decorate --pretty='format:%C(auto)%h %d %s %C(green)%an%C(bold blue) %ad' --abbrev-commit --all --date=relative
+	lol = log --graph --decorate --pretty='format:%C(auto)%h %d %s %C(green)%an%C(bold blue) %ad' --abbrev-commit --date=relative
