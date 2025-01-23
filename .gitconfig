@@ -3,6 +3,7 @@
 	email = aran.borkum@kraken.tech
 [core]
 	editor = nvim
+	excludesfile = /Users/aran.borkum/.gitignore_global
 [pull]
 	rebase = true
 [alias]

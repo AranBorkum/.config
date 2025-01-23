@@ -14,3 +14,10 @@ brew install eza
 
 # install aerospace
 brew install --cask nikitabobko/tap/aerospace
+
+# install git absorb
+brew install git-absorb
+
+# install mprocs
+brew install mprocs
+
