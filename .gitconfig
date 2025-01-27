@@ -10,6 +10,7 @@
 	lola = log --graph --decorate --pretty='format:%C(auto)%h %d %s %C(green)%an%C(bold blue) %ad' --abbrev-commit --all --date=relative
 	lol = log --graph --decorate --pretty='format:%C(auto)%h %d %s %C(green)%an%C(bold blue) %ad' --abbrev-commit --date=relative
 	absorb = absorb --and-rebase
+	fixup = "!git log -n 50 --pretty=format:'%h %s' --no-merges | fzf | cut -c -7 | xargs -o git commit --fixup"
 [url "ssh://git@github.com/octoenergy/"]
 	insteadof = https://github.com/octoenergy/
 [push]
