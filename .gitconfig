@@ -13,6 +13,9 @@
 	fixup = "!git log `git rev-parse --abbrev-ref HEAD` --pretty=format:'%h %s' --no-merges --not master | fzf | cut -c -7 | xargs -o git commit --fixup"
 	count-commit = rev-list --count HEAD --not master
 	irebase = "!git rebase -i HEAD~`git count-commit`"
+	fcheckout = "!git checkout `git branch | fzf`"
+	frebase = "!git rebase `git branch | fzf`"
+	smash = "!git add . ; gca ; git push -f"
 [url "ssh://git@github.com/octoenergy/"]
 	insteadof = https://github.com/octoenergy/
 [push]

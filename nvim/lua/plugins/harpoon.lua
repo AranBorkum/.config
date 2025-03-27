@@ -1,15 +1,18 @@
 return {
-	"theprimeagen/harpoon",
+	"ThePrimeagen/harpoon",
+	branch = "harpoon2",
 	config = function()
-		local mark = require("harpoon.mark")
-		local ui= require("harpoon.ui")
-
-		vim.keymap.set("n", "<leader>a", mark.add_file)
-		vim.keymap.set("n", "<C-e>", ui.toggle_quick_menu)
-
-		vim.keymap.set("n", "<C-h>", function() ui.nav_file(1) end)
-		vim.keymap.set("n", "<C-j>", function() ui.nav_file(2) end)
-		vim.keymap.set("n", "<C-k>", function() ui.nav_file(3) end)
-		vim.keymap.set("n", "<C-l>", function() ui.nav_file(4) end)
+		local harpoon = require("harpoon")
+		---@diagnostic disable-next-line: missing-parameter
+		harpoon:setup()
+		local function map(lhs, rhs, opts)
+			vim.keymap.set("n", lhs, rhs, opts or {})
+		end
+		map("<leader>ha", function() harpoon:list():add() end)
+		map("<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+		map("<C-h>", function() harpoon:list():select(1) end)
+		map("<C-j>", function() harpoon:list():select(2) end)
+		map("<C-k>", function() harpoon:list():select(3) end)
+		map("<C-l>", function() harpoon:list():select(4) end)
 	end
 }

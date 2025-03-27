@@ -1,0 +1,18 @@
+-- local utils = require("utils.functions")
+-- local map = utils.setKeymap
+-- 
+-- local convert_file_path_to_dotted_path = function(file_path)
+-- 	return string.gsub(file_path, "/", ".")
+-- end
+-- 
+-- local get_current_file_dotted_path = function()
+-- 	return convert_file_path_to_dotted_path(vim.fn.expand("%:.:r"))
+-- end
+-- 
+-- map("n", "<leader>yp", function()
+-- 	local import_path = get_current_file_dotted_path()
+-- 	vim.fn.setreg('"', import_path)
+-- end, { desc = "Copy the Python import path of the current file to the default clipboard" })
+-- 
+-- vim.opt.colorcolumn = "88"
+-- vim.opt.textwidth = 0

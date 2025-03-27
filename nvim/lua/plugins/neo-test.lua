@@ -1,5 +1,6 @@
 return {
 	"nvim-neotest/neotest",
+	lazy = true,
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"nvim-treesitter/nvim-treesitter",
@@ -9,10 +10,10 @@ return {
 	keys = {
 		{
 			"<leader>tf",
-			desc = "Run nearest",
 			function()
 				require("neotest").run.run()
-			end
+			end,
+			desc = "Run nearest",
 		},
 		{
 			"<leader>tl",
@@ -94,6 +95,8 @@ return {
 				neotest_python({
 					dap = { justMyCode = true, django = true },
 					args = { "-vv" },
+					runner = "pytest",
+					python = ".venv/bin/python"
 				}),
 			},
 			output = { open_on_run = true },

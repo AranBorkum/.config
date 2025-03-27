@@ -5,22 +5,19 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+alias ls="eza --color=always --long --git --no-filesize --icons=always --no-time --no-user --no-permissions"
 alias l="ls -l"
 alias ll="ls -l"
 alias em="emacs -nw"
-alias ls="eza --color=always --long --git --no-filesize --icons=always --no-time --no-user --no-permissions"
 alias gca="git commit --amend --no-edit --reset-author --no-verify"
 alias copy_branch="git branch --show-current | pbcopy"
+export PATH=$HOME/Personal/flutter/bin:$PATH
+export PATH=$PATH:~/.cargo/bin/
 
-export BROWSERSTACK_USERNAME="aranborkum_PdzwU9"
-export BROWSERSTACK_ACCESS_KEY="nns7xKT61rLo6MLZy3hG"
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
+source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-export PATH=$HOME/.gem/bin:$PATH
-export ANDROID_SDK_ROOT=/Users/aranborkum/Library/Android/sdk 
-
-source /usr/local/share/powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -30,7 +27,6 @@ source /usr/local/share/powerlevel10k/powerlevel10k.zsh-theme
 eval "$(fzf --zsh)"
 
 # -- Use fd instead of fzf --
-
 export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="fd --type=d --hidden --strip-cwd-prefix --exclude .git"
@@ -48,18 +44,48 @@ _fzf_compgen_dir() {
 }
 
 # ----- Bat (better cat) -----
-
 export BAT_THEME=tokyonight_night
+alias cat="bat"
 
-# ---- Eza (better ls) -----
-
-export PATH="$HOME/.mpb/common-be-scripts:$PATH"
-source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-# ---- TheFuck -----
-# thefuck alias
-eval $(thefuck --alias)
+eval "$(/opt/homebrew/bin/brew shellenv)"
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# Invoke tab-completion script to be sourced with the Z shell.
+# Known to work on zsh 5.0.x, probably works on later 4.x releases as well (as
+# it uses the older compctl completion system).
+
+_complete_invoke() {
+    # `words` contains the entire command string up til now (including
+    # program name).
+    #
+    # We hand it to Invoke so it can figure out the current context: spit back
+    # core options, task names, the current task's options, or some combo.
+    #
+    # Before doing so, we attempt to tease out any collection flag+arg so we
+    # can ensure it is applied correctly.
+    collection_arg=''
+    if [[ "${words}" =~ "(-c|--collection) [^ ]+" ]]; then
+        collection_arg=$MATCH
+    fi
+    # `reply` is the array of valid completions handed back to `compctl`.
+    # Use ${=...} to force whitespace splitting in expansion of
+    # $collection_arg
+    reply=( $(invoke ${=collection_arg} --complete -- ${words}) )
+}
+
+
+# Tell shell builtin to use the above for completing our given binary name(s).
+# * -K: use given function name to generate completions.
+# * +: specifies 'alternative' completion, where options after the '+' are only
+#   used if the completion from the options before the '+' result in no matches.
+# * -f: when function generates no results, use filenames.
+# * positional args: program names to complete for.
+compctl -K _complete_invoke + -f invoke inv
+
+# vim: set ft=sh :
+
