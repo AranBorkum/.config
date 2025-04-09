@@ -23,3 +23,9 @@ size = 14
 import = [
     "~/.config/alacritty/themes/themes/coolnight.toml"
 ]
+
+[keyboard]
+bindings = [
+  { key = "Right", mods = "Alt", chars = "\u001BF" },
+  { key = "Left",  mods = "Alt", chars = "\u001BB" },
+]
