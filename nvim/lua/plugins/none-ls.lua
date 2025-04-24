@@ -7,9 +7,10 @@ return {
 			sources = {
 				null_ls.builtins.formatting.stylua,
 				null_ls.builtins.formatting.prettier,
-				null_ls.builtins.formatting.isort,
 				null_ls.builtins.formatting.clang_format,
+				null_ls.builtins.formatting.isort,
 				null_ls.builtins.formatting.black,
+				null_ls.builtins.formatting.ast_grep,
 			},
 		})
 

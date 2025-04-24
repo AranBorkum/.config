@@ -8,8 +8,5 @@ return {
 		keys = {
 			{ "<space>fi", "<cmd>Telescope import<cr>", desc = "Imports" },
 		},
-		config = function()
-			require("telescope").load_extension("import")
-		end,
 	},
 }

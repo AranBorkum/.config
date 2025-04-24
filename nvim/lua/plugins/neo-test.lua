@@ -96,7 +96,7 @@ return {
 					dap = { justMyCode = true, django = true },
 					args = { "-vv" },
 					runner = "pytest",
-					python = ".venv/bin/python"
+					python = ".venv/bin/python",
 				}),
 			},
 			output = { open_on_run = true },
