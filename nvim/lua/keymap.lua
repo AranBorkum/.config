@@ -13,6 +13,7 @@ vim.g.mapleader = " "
 vim.wo.relativenumber = true
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
+vim.opt.scrolloff = 8
 
 map("n", "<C-d>", "<C-d>zz", { desc = "" })
 map("n", "<C-u>", "<C-u>zz", { desc = "" })

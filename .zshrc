@@ -11,13 +11,15 @@ alias ll="ls -l"
 alias em="emacs -nw"
 alias gca="git commit --amend --no-edit --reset-author --no-verify"
 alias copy_branch="git branch --show-current | pbcopy"
+alias get_idf='. $HOME/esp/esp-idf/export.sh'
+
 export PATH=$HOME/Personal/flutter/bin:$PATH
 export PATH=$PATH:~/.cargo/bin/
-
+export IDF_PATH=$HOME/esp/esp-idf
+export PATH="$IDF_PATH/tools:$PATH"
 source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -89,3 +91,6 @@ compctl -K _complete_invoke + -f invoke inv
 
 # vim: set ft=sh :
 
+
+# Created by `pipx` on 2025-04-02 09:21:42
+export PATH="$PATH:/Users/aran.borkum/.local/bin"
