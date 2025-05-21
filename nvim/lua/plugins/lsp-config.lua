@@ -37,7 +37,6 @@ return {
 			lspconfig.ts_ls.setup({ capabilities = capabilities })
 			lspconfig.html.setup({ capabilities = capabilities })
 			lspconfig.harper_ls.setup({ capabilities = capabilities })
-			lspconfig.ast_grep.setup({ capabilities = capabilities })
 			lspconfig.rust_analyzer.setup({ capabilities = capabilities })
 			vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {})
 			vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
