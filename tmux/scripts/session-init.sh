@@ -6,12 +6,12 @@ SESSION_NAME="$1"
 if [ "$(tmux list-windows -t "$SESSION_NAME" | wc -l)" -eq 1 ]; then
 	# Rename first window to neovim and launch nvim
 	tmux rename-window -t "$SESSION_NAME:1" neovim
-	tmux send-keys -t "$SESSION_NAME:1" 'source .venv/bin/activate ; clear' C-m
+	tmux send-keys -t "$session_name:1" 'source .venv/bin/activate ; clear' c-m
   	tmux send-keys -t "$SESSION_NAME:1" 'nvim' C-m
 
   	# Add second terminal window
   	tmux new-window -t "$SESSION_NAME" -n terminal
-	tmux send-keys -t "$SESSION_NAME:2" 'source .venv/bin/activate ; clear' C-m
+	tmux send-keys -t "$session_name:2" 'source .venv/bin/activate ; clear' c-m
 
   	# Add mprocs window
   	tmux new-window -t "$SESSION_NAME" -n mprocs
