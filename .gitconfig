@@ -16,6 +16,7 @@
 	fcheckout = "!git checkout `git branch | fzf`"
 	frebase = "!git rebase `git branch | fzf`"
 	smash = "!git add . ; gca ; git push -f"
+	short-branch = "!git rev-parse --abbrev-ref HEAD 2>/dev/null | awk '{ if (length($0) > 30) print substr($0, 1, 30) \"...\"; else print }'"
 [url "ssh://git@github.com/octoenergy/"]
 	insteadof = https://github.com/octoenergy/
 [push]

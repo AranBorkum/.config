@@ -4,3 +4,5 @@ mprocs.log
 .env
 wip/
 .oauth
+*.db
+.project

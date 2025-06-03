@@ -45,8 +45,8 @@ vim.keymap.set("n", "<leader>yp", function()
 	vim.fn.setreg('"', import_path)
 end)
 
-vim.keymap.set("n", "<leader>Yp", function ()
-	local file_path = vim.fn.expand("%")	
+vim.keymap.set("n", "<leader>Yp", function()
+	local file_path = vim.fn.expand("%")
 	vim.fn.setreg("+", file_path)
 end)
 
