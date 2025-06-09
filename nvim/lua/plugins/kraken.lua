@@ -1,14 +1,20 @@
 return {
 	"octoenergy/kraken.nvim",
 	keys = {
-		{ "<leader>gt", "<cmd>KLocateTests<cr>", desc = "Locate tests for kraken core" },
+		{
+			"<leader>lt",
+			"<cmd>KLocateTests<cr>",
+			desc = "Locate test file(s)",
+		},
 	},
-
+	lazy = true,
+	dev = true,
 	opts = {
 		commands = {
 			locate_tests = {
-				open_command = "vsp", -- command used to open the test file, e.g. "e", "split", "lefta vsp"
+				open_command = "lefta vsp",
 			},
 		},
+		picker = "picker",
 	},
 }
