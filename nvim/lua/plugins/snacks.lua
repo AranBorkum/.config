@@ -90,5 +90,12 @@ return {
 			end,
 			desc = "Toggle Terminal",
 		},
+		-- Misc
+		{
+			"<leader>zz",
+			function ()
+				Snacks.dashboard()
+			end
+		}
 	},
 }

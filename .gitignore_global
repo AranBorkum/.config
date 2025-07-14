@@ -6,3 +6,4 @@ wip/
 .oauth
 *.db
 .project
+.cookie-cutter.yaml

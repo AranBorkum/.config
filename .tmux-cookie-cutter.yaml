@@ -1,0 +1,11 @@
+default_windows:
+  - name: "neovim"
+    command: "nvim"
+  - name: "terminal"
+  - name: "mprocs"
+    command: "mprocs"
+  - name: "terminal"
+    panes:
+        - split_direction: "vertical"
+          size: 25
+        - split_direction: "horizontal"

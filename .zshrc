@@ -94,3 +94,6 @@ compctl -K _complete_invoke + -f invoke inv
 
 # Created by `pipx` on 2025-04-02 09:21:42
 export PATH="$PATH:/Users/aran.borkum/.local/bin"
+
+ # Added by Kraken Core install script:
+export PATH="/Applications/Postgres.app/Contents/Versions/15/bin:$PATH"

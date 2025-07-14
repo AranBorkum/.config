@@ -1,0 +1,4 @@
+{
+  "postgres_client": "psql",
+  "query_output_format": "table"
+}
