@@ -17,6 +17,7 @@ export PATH=$HOME/Personal/flutter/bin:$PATH
 export PATH=$PATH:~/.cargo/bin/
 export IDF_PATH=$HOME/esp/esp-idf
 export PATH="$IDF_PATH/tools:$PATH"
+export TMUX_PLUGIN_MANAGER_PATH=$HOME/.config/tmux/plugins
 source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

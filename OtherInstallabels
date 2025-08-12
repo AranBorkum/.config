@@ -3,4 +3,4 @@
 git clone https://github.com/alacritty/alacritty-theme ~/.config/alacritty/themes
 curl https://raw.githubusercontent.com/josean-dev/dev-environment-files/main/.config/alacritty/themes/themes/coolnight.toml --output ~/.config/alacritty/themes/themes/coolnight.toml
 cargo install tmux-sessionizer
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+cargo install tmuxedo
