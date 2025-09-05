@@ -98,3 +98,7 @@ export PATH="$PATH:/Users/aran.borkum/.local/bin"
 
  # Added by Kraken Core install script:
 export PATH="/Applications/Postgres.app/Contents/Versions/15/bin:$PATH"
+
+fpath+=~/.zfunc; autoload -Uz compinit; compinit
+
+zstyle ':completion:*' menu select

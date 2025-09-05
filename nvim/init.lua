@@ -23,3 +23,5 @@ vim.opt.rtp:prepend(lazypath)
 
 require("keymap")
 require("lazy").setup("plugins")
+
+vim.keymap.set('n', '<leader>mb', require('my_plugin').prompt)
