@@ -1,6 +1,11 @@
 return {
 	{
 		"williamboman/mason.nvim",
+		opts = {
+			ensure_installed = {
+				"debugpy",
+			},
+		},
 		config = function()
 			require("mason").setup()
 		end,
@@ -12,11 +17,11 @@ return {
 				ensure_installed = {
 					"lua_ls",
 					"pylsp",
-					"pyright",
+					-- "pyright",
+					-- "ty",
 					"bashls",
 					"ts_ls",
 					"html",
-					"ruff",
 					"harper_ls",
 					"ast_grep",
 					"rust_analyzer",
@@ -32,6 +37,7 @@ return {
 
 			local lspconfig = require("lspconfig")
 			lspconfig.lua_ls.setup({})
+			-- lspconfig.ty.setup({ capabilities = capabilities, cmd_env = { VIRTUAL_ENV = ".venv" } })
 			lspconfig.pylsp.setup({ capabilities = capabilities, cmd_env = { VIRTUAL_ENV = ".venv" } })
 			lspconfig.bashls.setup({ capabilities = capabilities })
 			lspconfig.ts_ls.setup({ capabilities = capabilities })

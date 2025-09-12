@@ -7,3 +7,4 @@ wip/
 *.db
 .project
 .tmux-cookie-cutter.yaml
+.nvim.lua

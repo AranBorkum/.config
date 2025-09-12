@@ -89,12 +89,13 @@ return {
 	config = function()
 		local neotest = require("neotest")
 		local neotest_python = require("neotest-python")
+		local pytest_args = vim.g.test_cmd or { "-vv" }
 
 		neotest.setup({
 			adapters = {
 				neotest_python({
 					dap = { justMyCode = true, django = true },
-					args = { "-vv" },
+					args = pytest_args,
 					runner = "pytest",
 					python = ".venv/bin/python",
 				}),
@@ -105,6 +106,7 @@ return {
 				concurrent = 1,
 			},
 			summary = {
+				enabled = true,
 				animated = false,
 			},
 		})
