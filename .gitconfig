@@ -11,14 +11,17 @@
 	lola = log --graph --decorate --pretty='format:%C(auto)%h %d %s %C(green)%an%C(bold blue) %ad' --abbrev-commit --all --date=relative
 	lol = log --graph --decorate --pretty='format:%C(auto)%h %d %s %C(green)%an%C(bold blue) %ad' --abbrev-commit --date=relative
 	absorb = absorb --and-rebase
-	fixup = "!git log `git rev-parse --abbrev-ref HEAD` --pretty=format:'%h %s' --no-merges --not master | fzf | cut -c -7 | xargs -o git commit --fixup"
-	count-commit = rev-list --count HEAD --not master
+	default-branch = "!git symbolic-ref --short refs/remotes/origin/HEAD 2>/dev/null | sed 's@^origin/@@'"
 	irebase = "!git rebase -i HEAD~`git count-commit` --autostash"
 	fcheckout = "!git checkout `git branch | fzf`"
 	frebase = "!git rebase `git branch | fzf`"
-	smash = "!git add . ; gca ; git push -f"
 	short-branch = "!git rev-parse --abbrev-ref HEAD 2>/dev/null | awk '{ if (length($0) > 30) print substr($0, 1, 30) \"...\"; else print }'"
-	update = "!git checkout master ; git pull --rebase ; git switch - ; git rebase master"
+	fixup = "!f(){ \
+		base=$(git default-branch); \
+		git log `git rev-parse --abbrev-ref HEAD` --pretty=format:'%h %s' --no-merges --not \"$base\" | fzf | cut -c -7 | xargs -o git commit --fixup; \
+    }; f"
+	count-commit = "!f(){ base=$(git default-branch); git rev-list --count HEAD --not \"$base\"; }; f"
+	update = "!f(){ base=$(git default-branch); git checkout \"$base\" ; git pull --rebase ; git switch - ; git rebase \"$base\"; }; f"
 [url "ssh://git@github.com/octoenergy/"]
 	insteadof = https://github.com/octoenergy/
 [push]
@@ -34,3 +37,4 @@
     conflictstyle = diff3
 [diff]
     colorMoved = default
+
