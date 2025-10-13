@@ -1,7 +1,7 @@
 return {
 	{
 		"mfussenegger/nvim-dap",
-		lazy = true,
+		lazy = false,
 		dependencies = {
 			"nvim-neotest/nvim-nio",
 			"nvim-lua/plenary.nvim",
@@ -107,6 +107,7 @@ return {
 				desc = "Toggle UI",
 			},
 		},
+		opts = { rocks = { enables = false } },
 		config = function()
 			local dap, dapui = require("dap"), require("dapui")
 			dapui.setup()
@@ -128,9 +129,11 @@ return {
 			"mfussenegger/nvim-dap",
 			"williamboman/mason.nvim",
 		},
+		opts = { rocks = { enables = false } },
+		dev = true,
 		config = function()
-			local path = "~/.local/share/nvim/mason/packages/debugpy/venv/bin/python"
+			local path = vim.fn.expand("~/.local/share/nvim/mason/packages/debugpy/venv/bin/python")
 			require("dap-python").setup(path)
 		end,
-	}
+	},
 }

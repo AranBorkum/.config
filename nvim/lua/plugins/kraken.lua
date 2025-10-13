@@ -8,7 +8,7 @@ return {
 		},
 	},
 	lazy = true,
-	dev = true,
+	-- dev = true,
 	opts = {
 		commands = {
 			locate_tests = {
