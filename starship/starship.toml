@@ -1,6 +1,6 @@
 # Get editor completions based on the config schema
 "$schema" = 'https://starship.rs/config-schema.json'
-format = """$directory$fill$all$character
+format = """$directory$git_branch$git_status$fill$all$character
 """
 palette = "catppuccin_mocha"
 command_timeout = 1000
@@ -23,7 +23,7 @@ format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
 disabled = true
 
 [git_branch]
-format = " [$symbol$branch]($style) "
+format = "[$symbol$branch]($style) "
 symbol = "🌱 "
 style = "bold purple"
 
