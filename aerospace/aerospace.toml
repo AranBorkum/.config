@@ -7,12 +7,22 @@
 # You can use it to add commands that run after login to macOS user session.
 # 'start-at-login' needs to be 'true' for 'after-login-command' to work
 # Available commands: https://nikitabobko.github.io/AeroSpace/commands
-after-login-command = ["exec-and-forget $HOME/.config/aerospace/startup.sh"]
+after-login-command = []
 
 # You can use it to add commands that run after AeroSpace startup.
 # 'after-startup-command' is run after 'after-login-command'
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
-after-startup-command = ["exec-and-forget $HOME/.config/aerospace/startup.sh"]
+after-startup-command = [
+  "exec-and-forget $HOME/.config/aerospace/startup.sh",
+  "exec-and-forget sketchybar",
+  "exec-and-forget borders active_color=0xFFEB212E inactive_color=0xFF494D64 width=5.0",
+]
+
+exec-on-workspace-change = [
+  "/bin/bash",
+  "-c",
+  "sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE",
+]
 
 # Start AeroSpace at login
 start-at-login = true
@@ -51,12 +61,14 @@ on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 #                 In this example, 24 is a default value when there is no match.
 #                 Monitor pattern is the same as for 'workspace-to-monitor-force-assignment'.
 #                 See: https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
+# Default gaps — apply to all displays unless overridden
+
 [gaps]
 inner.horizontal = 0
 inner.vertical =   0
 outer.left =       0
 outer.bottom =     0
-outer.top =        0
+outer.top =        [{monitor."Built-in Retina Display" = 0}, 32]
 outer.right =      0
 
 # 'main' binding mode declaration
