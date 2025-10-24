@@ -1,6 +1,6 @@
 return {
 	"aranborkum/pr-tools.nvim",
-	dev = true,
+	dev = false,
 	keys = {
 		{
 			"<leader>prl",
@@ -19,7 +19,7 @@ return {
 		},
 		{
 			"<leader>epr",
-			"<cmd>RunPrToolsTest<cr>",
+			"<cmd>EditPullRequestDescription<cr>",
 			desc = "Edit the body of the pull request",
 		},
 		{
@@ -32,9 +32,20 @@ return {
 			"<cmd>MarkPullRequestAsReady<cr>",
 			desc = "Mark a draft PR as ready",
 		},
+		{
+			"<leader>pgs",
+			"<cmd>SwitchPostgresInstance<cr>",
+			desc = "Switch postgres instance",
+		},
 	},
 	opts = {
-		open_in_draft = true,
-		slack_link_emoji = "pr-outline"
+		pr = {
+			open_in_draft = true,
+			slack_link_emoji = "pr-outline",
+		},
+		db = {
+			db_instance_dir = "/Users/aran.borkum/Library/Application Support/Postgres/var-17",
+			pg_ctl = "/Applications/Postgres.app/Contents/Versions/17/bin/pg_ctl",
+		},
 	},
 }
