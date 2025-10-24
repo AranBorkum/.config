@@ -6,3 +6,7 @@ git clone https://github.com/alacritty/alacritty-theme ~/.config/alacritty/theme
 curl https://raw.githubusercontent.com/josean-dev/dev-environment-files/main/.config/alacritty/themes/themes/coolnight.toml --output ~/.config/alacritty/themes/themes/coolnight.toml
 cargo install tmux-sessionizer
 cargo install tmuxedo
+
+ln -s ~/.config/git/gitconfig.ini ~/.gitconfig
+ln -s ~/.config/zsh/zshrc ~/.zshrc
+
