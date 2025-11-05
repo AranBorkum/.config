@@ -25,6 +25,7 @@ return {
 					"harper_ls",
 					"ast_grep",
 					"rust_analyzer",
+					"gopls",
 				},
 			})
 		end,
@@ -44,6 +45,7 @@ return {
 			lspconfig.html.setup({ capabilities = capabilities })
 			lspconfig.harper_ls.setup({ capabilities = capabilities })
 			lspconfig.rust_analyzer.setup({ capabilities = capabilities })
+			lspconfig.gopls.setup({ capabilities = capabilities })
 			vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {})
 			vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
 			vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, {})
