@@ -1,3 +1,13 @@
 #!/usr/bin/env bash
 
-uv tool install git+ssh://git@github.com/octoenergy/ktdb.git
+CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+source "$CURRENT_DIR/helpers.sh"
+
+
+main() {
+	install_brew_and_dependencies Brewfile.kraken
+	install_or_update_uv_tool git+ssh://git@github.com/octoenergy/ktdb.git ktdb
+}
+ 
+main

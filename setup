@@ -1,18 +1,63 @@
 #!/usr/bin/env bash
 
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-brew bundle install
-git clone https://github.com/alacritty/alacritty-theme ~/.config/alacritty/themes
-curl https://raw.githubusercontent.com/josean-dev/dev-environment-files/main/.config/alacritty/themes/themes/coolnight.toml --output ~/.config/alacritty/themes/themes/coolnight.toml
-cargo install tmux-sessionizer
-cargo install tmuxedo
+CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+EXTRA_SCRIPTS=""
 
-ln -s ~/.config/git/gitconfig.ini ~/.gitconfig
-ln -s ~/.config/zsh/zshrc ~/.zshrc
+source "$CURRENT_DIR/helpers.sh"
 
-osascript -e 'tell application "System Events" to set picture of every desktop to "~/.config/images/Octocat/Octocat big brother background.png"'
+parse_args() {
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+            --extra)
+                EXTRA_SCRIPTS="$2"
+                shift 2
+                ;;
+            *)
+                echo "Unknown option: $1"
+                exit 1
+                ;;
+        esac
+    done
+}
 
-defaults -currentHost write com.apple.screensaver moduleDict -dict moduleName "Classic" path "/System/Library/Screen Savers/Classic.saver" type 0
-defaults -currentHost write com.apple.screensaver photoPath "~/.config/images/Octocat"
-killall cfprefsd
+source_extra_scripts() {
+    if [[ -n "$EXTRA_SCRIPTS" ]]; then
+        IFS=',' read -ra SCRIPTS <<< "$EXTRA_SCRIPTS"
+        for script in "${SCRIPTS[@]}"; do
+            if [[ -f "$script" ]]; then
+                source "$script"
+            else
+                echo "Warning: Extra script '$script' not found"
+            fi
+        done
+    fi
+}
 
+set_wallpaper_and_screen_saver() {
+    local TAG="Setting background and screen saver..."
+
+    echo -n "$TAG"
+
+	osascript -e 'tell application "System Events" to set picture of every desktop to "~/.config/images/Octocat/Octocat big brother background.png"'
+
+	defaults -currentHost write com.apple.screensaver moduleDict -dict moduleName "Classic" path "/System/Library/Screen Savers/Classic.saver" type 0
+	defaults -currentHost write com.apple.screensaver photoPath "~/.config/images/Octocat"
+	killall cfprefsd
+
+    print_status "$TAG" "$?"
+}
+
+main() {
+	parse_args "$@"
+
+	install_brew_and_dependencies
+	install_cargo_crate tmux-sessionizer tms
+	install_cargo_crate tmuxedo
+	create_symlink ~/.config/git/gitconfig.ini ~/.gitconfig
+	create_symlink ~/.config/zsh/zshrc ~/.zshrc
+	set_wallpaper_and_screen_saver
+
+	source_extra_scripts
+}
+
+main $@
