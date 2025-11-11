@@ -5,6 +5,21 @@ EXTRA_SCRIPTS=""
 
 source "$CURRENT_DIR/helpers.sh"
 
+usage() {
+    cat <<EOF
+Usage: $(basename "$0") [OPTIONS]
+
+Sets up your environment with wallpapers, screen saver, and other tools.
+
+Options:
+  --extra <files>     Comma-separated list of extra scripts to source.
+  -h, --help          Show this help message and exit.
+
+Examples:
+  $(basename "$0") --extra ~/scripts/custom1.sh,~/scripts/custom2.sh
+EOF
+}
+
 parse_args() {
     while [[ $# -gt 0 ]]; do
         case "$1" in
@@ -12,8 +27,14 @@ parse_args() {
                 EXTRA_SCRIPTS="$2"
                 shift 2
                 ;;
+            -h|--help)
+                usage
+                exit 0
+                ;;
             *)
                 echo "Unknown option: $1"
+                echo
+                usage
                 exit 1
                 ;;
         esac

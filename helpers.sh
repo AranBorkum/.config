@@ -24,7 +24,6 @@ install_brew_and_dependencies() {
 
     # Install dependencies if needed
     if [[ $(brew bundle check --file="$BREWFILE" >/dev/null 2>&1; echo $?) -ne 0 ]]; then
-        echo "Updates found — running brew bundle install..."
         brew bundle install --file="$BREWFILE"
     fi
 
