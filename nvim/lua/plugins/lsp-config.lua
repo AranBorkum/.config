@@ -17,8 +17,6 @@ return {
 				ensure_installed = {
 					"lua_ls",
 					"pylsp",
-					-- "pyright",
-					-- "ty",
 					"bashls",
 					"ts_ls",
 					"html",
@@ -38,7 +36,6 @@ return {
 
 			local lspconfig = require("lspconfig")
 			lspconfig.lua_ls.setup({})
-			-- lspconfig.ty.setup({ capabilities = capabilities, cmd_env = { VIRTUAL_ENV = ".venv" } })
 			lspconfig.pylsp.setup({ capabilities = capabilities, cmd_env = { VIRTUAL_ENV = ".venv" } })
 			lspconfig.bashls.setup({ capabilities = capabilities })
 			lspconfig.ts_ls.setup({ capabilities = capabilities })
