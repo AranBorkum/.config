@@ -16,6 +16,14 @@ return {
 			desc = "Run nearest",
 		},
 		{
+			"<leader>tc",
+			function ()
+				require("neotest").run.run({
+					args = { "--create-db" }
+				})
+			end
+		},
+		{
 			"<leader>tl",
 			function()
 				require("neotest").run.run_last()
