@@ -20,8 +20,7 @@ return {
 					"bashls",
 					"ts_ls",
 					"html",
-					"harper_ls",
-					"ast_grep",
+					"clangd",
 					"rust_analyzer",
 					"gopls",
 				},
@@ -40,7 +39,7 @@ return {
 			lspconfig.bashls.setup({ capabilities = capabilities })
 			lspconfig.ts_ls.setup({ capabilities = capabilities })
 			lspconfig.html.setup({ capabilities = capabilities })
-			lspconfig.harper_ls.setup({ capabilities = capabilities })
+			lspconfig.clangd.setup({ capabilities = capabilities })
 			lspconfig.rust_analyzer.setup({ capabilities = capabilities })
 			lspconfig.gopls.setup({ capabilities = capabilities })
 			vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {})
