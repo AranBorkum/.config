@@ -8,4 +8,5 @@ wip/
 *.db
 .project
 .tmux-cookie-cutter.yaml
+.tmux-cookie-cutter.toml
 .nvim.lua

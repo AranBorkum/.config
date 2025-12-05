@@ -4,6 +4,7 @@ return {
 		opts = {
 			ensure_installed = {
 				"debugpy",
+				"ruff",
 			},
 		},
 		config = function()
@@ -17,12 +18,13 @@ return {
 				ensure_installed = {
 					"lua_ls",
 					"pylsp",
+					"ruff",
 					"bashls",
 					"ts_ls",
 					"html",
 					"clangd",
 					"rust_analyzer",
-					"gopls",
+					"arduino_language_server",
 				},
 			})
 		end,
@@ -32,16 +34,15 @@ return {
 		lazy = false,
 		config = function()
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
+			local config = vim.lsp.config
 
-			local lspconfig = require("lspconfig")
-			lspconfig.lua_ls.setup({})
-			lspconfig.pylsp.setup({ capabilities = capabilities, cmd_env = { VIRTUAL_ENV = ".venv" } })
-			lspconfig.bashls.setup({ capabilities = capabilities })
-			lspconfig.ts_ls.setup({ capabilities = capabilities })
-			lspconfig.html.setup({ capabilities = capabilities })
-			lspconfig.clangd.setup({ capabilities = capabilities })
-			lspconfig.rust_analyzer.setup({ capabilities = capabilities })
-			lspconfig.gopls.setup({ capabilities = capabilities })
+			config("lua_ls", {})
+			config("pylsp", { capabilities = capabilities, cmd_env = { VIRTUAL_ENV = ".venv" } })
+			config("bashls", { capabilities = capabilities })
+			config("ts_ls", { capabilities = capabilities })
+			config("html", { capabilities = capabilities })
+			config("clangd", { capabilities = capabilities })
+
 			vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {})
 			vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
 			vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, {})

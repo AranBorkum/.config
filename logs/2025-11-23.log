@@ -1,0 +1,122 @@
+Installing brew and dependencies...Using charmbracelet/tap
+Using dart-lang/dart
+Using felixkratz/formulae
+Using getsentry/tools
+Using jesseduffield/lazydocker
+Using nikitabobko/tap
+Using sass/sass
+Using stripe/stripe-cli
+Using thezoraiz/ascii-image-converter
+Using act
+Upgrading llvm
+Using arduino-cli
+Using automake
+Using bat
+Using binutils
+Using btop
+Using cairo
+Using cask
+Using cmake
+Using cmatrix
+Using cocoapods
+Using dfu-util
+Using docker
+Using docker-compose
+Using eza
+Using fd
+Using fzf
+Using gh
+Using git
+Using git-absorb
+Using git-delta
+Using grep
+Using harlequin
+Using lazygit
+Using libffi
+Using libmagic
+Using libmemcached
+Using lua
+Using lua@5.3
+Using luacheck
+Using luarocks
+Using memcached
+Using mprocs
+Using neofetch
+Using neovim
+Using ninja
+Using node
+Using oxipng
+Using pcre
+Using pgcli
+Using pipx
+Using postgresql@14
+Using postgresql@17
+Using posting
+Using pre-commit
+Using pyenv
+Using pyenv-virtualenvwrapper
+Using ripgrep
+Using rust
+Using slides
+Using starship
+Using stripe-cli
+Using terraform
+Using thefuck
+Using tmux
+Using tmux-sessionizer
+Using uv
+Using wget
+Using zlib
+Using zsh-autosuggestions
+Using zsh-syntax-highlighting
+Using charmbracelet/tap/gum
+Using getsentry/tools/sentry-cli
+Using jesseduffield/lazydocker/lazydocker
+Using openssl@1.1
+Upgrading sass/sass/sass
+==> Upgrading 1 outdated package:
+sass/sass/sass 1.94.0 -> 1.94.2
+==> Fetching downloads for: sass
+✔︎ Bottle Manifest buf (1.60.0)
+✔︎ Bottle buf (1.60.0)
+✔︎ Resource sass--language
+✔︎ Formula sass (1.94.2)
+✔︎ Formula dart (3.10.1)
+==> Upgrading sass/sass/sass
+  1.94.0 -> 1.94.2 
+Error: Your Command Line Tools are too outdated.
+Update them from Software Update in System Settings.
+
+If that doesn't show you any updates, run:
+  sudo rm -rf /Library/Developer/CommandLineTools
+  sudo xcode-select --install
+
+Alternatively, manually download them from:
+  https://developer.apple.com/download/all/.
+You should download the Command Line Tools for Xcode 26.0.
+
+
+Using thezoraiz/ascii-image-converter/ascii-image-converter
+Using 1password-cli
+Using aerospace
+Using alacritty
+Using arduino-ide
+Using brave-browser
+Using cool-retro-term
+Using dbeaver-community
+Using flutter
+Using font-hack-nerd-font
+Using font-meslo-lg-nerd-font
+Using font-sf-pro
+Using font-sketchybar-app-font
+Using obsidian
+Using postgres-unofficial
+Using spotify
+Using whatsapp
+Using zen
+Installing brew and dependencies... ✖
+Installing tmux-sessionizer crate...Installing tmux-sessionizer crate... ✔
+Installing tmuxedo crate...Installing tmuxedo crate... ✔
+Creating symlink to /Users/aran.borkum/.gitconfig...Creating symlink to /Users/aran.borkum/.gitconfig... ✔
+Creating symlink to /Users/aran.borkum/.zshrc...Creating symlink to /Users/aran.borkum/.zshrc... ✔
+Setting background and screen saver...Setting background and screen saver... ✔

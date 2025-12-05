@@ -6,6 +6,8 @@ default_windows:
     command: "mprocs"
   - name: "terminal"
     panes:
-        - split_direction: "vertical"
-          size: 25
-        - split_direction: "horizontal"
+    - split_direction: "vertical"
+      size: 25  # percentage width of a vertically split pane
+    - split_direction: "horizontal"
+      size: 40
+

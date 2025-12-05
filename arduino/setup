@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+arduino-cli config init
+arduino-cli core update-index
+arduino-cli core install esp32:esp32
+
+

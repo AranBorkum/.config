@@ -14,15 +14,10 @@ after-login-command = []
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
 after-startup-command = [
   "exec-and-forget $HOME/.config/aerospace/startup.sh",
-  "exec-and-forget sketchybar",
   "exec-and-forget borders active_color=0xFFEB212E inactive_color=0xFF494D64 width=5.0",
 ]
 
-exec-on-workspace-change = [
-  "/bin/bash",
-  "-c",
-  "sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE",
-]
+exec-on-workspace-change = []
 
 # Start AeroSpace at login
 start-at-login = true
