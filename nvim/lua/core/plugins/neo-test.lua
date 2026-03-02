@@ -6,6 +6,7 @@ return {
 		"nvim-treesitter/nvim-treesitter",
 		"nvim-neotest/neotest-python",
 		"mfussenegger/nvim-dap",
+		"mrcjkb/rustaceanvim",
 	},
 	keys = {
 		{
@@ -17,11 +18,11 @@ return {
 		},
 		{
 			"<leader>tc",
-			function ()
+			function()
 				require("neotest").run.run({
-					args = { "--create-db" }
+					args = { "--create-db" },
 				})
-			end
+			end,
 		},
 		{
 			"<leader>tl",
@@ -97,6 +98,7 @@ return {
 	config = function()
 		local neotest = require("neotest")
 		local neotest_python = require("neotest-python")
+		local neotest_rust = require("rustaceanvim.neotest")
 		local pytest_args = vim.g.test_cmd or { "-vv" }
 
 		neotest.setup({
@@ -107,6 +109,7 @@ return {
 					runner = "pytest",
 					python = ".venv/bin/python",
 				}),
+				neotest_rust({}),
 			},
 			output = { open_on_run = true },
 			discovery = {

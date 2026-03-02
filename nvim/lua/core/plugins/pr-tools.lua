@@ -37,6 +37,11 @@ return {
 			"<cmd>SwitchPostgresInstance<cr>",
 			desc = "Switch postgres instance",
 		},
+		{
+			"<leader>gt",
+			"<cmd>GetTranslation<cr>",
+			desc = "Get translation of string under curser between quotes",
+		},
 	},
 	opts = {
 		pr = {
@@ -46,6 +51,9 @@ return {
 		db = {
 			db_instance_dir = "/Users/aran.borkum/Library/Application Support/Postgres/var-17",
 			pg_ctl = "/Applications/Postgres.app/Contents/Versions/17/bin/pg_ctl",
+		},
+		translations = {
+			dir = "src/octoenergy/plugins/common/i18n/locales/",
 		},
 	},
 }
