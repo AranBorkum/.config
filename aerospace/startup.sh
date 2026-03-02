@@ -9,6 +9,7 @@ apps_to_spaces=(
 	Alacritty 3
 	Slack 5
 	Spotify 6
+	Chrome 7
 	WhatsApp 8
 	Calendar 8
 	Messages 9
