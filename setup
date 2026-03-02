@@ -55,9 +55,9 @@ source_extra_scripts() {
 }
 
 set_wallpaper_and_screen_saver() {
-    local TAG="Setting background and screen saver..."
+    local TAG="Setting background and screen saver"
 
-    echo -n "$TAG"
+    echo -n "● $TAG"
 
 	osascript -e 'tell application "System Events" to set picture of every desktop to "~/.config/images/Octocat/Octocat big brother background.png"'
 
@@ -72,8 +72,6 @@ main() {
 	parse_args "$@"
 
 	install_brew_and_dependencies
-	install_cargo_crate tmux-sessionizer tms
-	install_cargo_crate tmuxedo
 	create_symlink ~/.config/git/gitconfig.ini ~/.gitconfig
 	create_symlink ~/.config/zsh/zshrc ~/.zshrc
 	set_wallpaper_and_screen_saver

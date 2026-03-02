@@ -1,21 +1,25 @@
 #!/usr/bin/env bash
 
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+NC='\033[0m' # No Color
+
 print_status() {
     local TAG="$1"
     local STATUS="$2"  # 0 = success, non-zero = failure
 
     if [[ "$STATUS" -eq 0 ]]; then
-        echo -e "\r$TAG ✔"
-    else
-        echo -e "\r$TAG ✖"
+		echo -e "\r${GREEN}✔${NC} $TAG"
+    else             
+		echo -e "\r${RED}✖${NC} $TAG"
     fi
 }
 
 install_brew_and_dependencies() {
     local BREWFILE="$1"
-    local TAG="Installing brew and dependencies..."
+    local TAG="Installing brew and dependencies"
 
-    echo -n "$TAG"
+    echo -n "● $TAG"
 
     # Install Homebrew if missing
     if ! command -v brew >/dev/null 2>&1; then
@@ -30,26 +34,12 @@ install_brew_and_dependencies() {
     print_status "$TAG" "$?"
 }
 
-install_cargo_crate() {
-    local CRATE_NAME="$1"
-    local EXECUTABLE_NAME="${2:-$CRATE_NAME}"
-    local TAG="Installing $CRATE_NAME crate..."
-
-    echo -n "$TAG"
-
-    if ! command -v "$EXECUTABLE_NAME" >/dev/null 2>&1; then
-        cargo install "$CRATE_NAME"
-    fi
-
-    print_status "$TAG" "$?"
-}
-
 create_symlink() {
     local TARGET="$1"
     local LINK_NAME="$2"
-    local TAG="Creating symlink to $LINK_NAME..."
+    local TAG="Creating symlink to $LINK_NAME"
 
-    echo -n "$TAG"
+    echo -n "● $TAG"
 
     if [[ -z "$TARGET" || -z "$LINK_NAME" ]]; then
         print_status "$TAG" 1
@@ -66,9 +56,9 @@ create_symlink() {
 install_or_update_uv_tool() {
     local INSTALLABLE="$1"
     local EXECUTABLE="$2"  # optional
-	local TAG="Installing and/or updating $EXECUTABLE with uv..."
+	local TAG="Installing and/or updating $EXECUTABLE with uv"
 	
-	echo -n "$TAG"
+    echo -n "● $TAG"
 
     if [[ -z "$INSTALLABLE" ]]; then
         echo "Usage: install_or_update_uv_tool <git_link> [executable_name]"

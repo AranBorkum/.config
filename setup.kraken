@@ -8,6 +8,7 @@ source "$CURRENT_DIR/helpers.sh"
 main() {
 	install_brew_and_dependencies Brewfile.kraken
 	install_or_update_uv_tool git+ssh://git@github.com/octoenergy/ktdb.git ktdb
+	install_or_update_uv_tool git+https://github.com/octoenergy/ktl-data-cli
 }
  
 main
