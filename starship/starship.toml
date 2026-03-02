@@ -22,6 +22,9 @@ format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
 [nodejs]
 disabled = true
 
+[aws]
+disabled = true
+
 [git_branch]
 format = "[$symbol$branch]($style) "
 symbol = "🌱 "
