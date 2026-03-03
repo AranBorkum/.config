@@ -1,11 +1,12 @@
+---@type ToolingConfig
 return {
 	formatters = { "sql-formatter" },
-	linters = {"sqlfluff"},
+	linters = { "sqlfluff" },
 	debuggers = {},
 	lsp_servers = {
 		{
 			name = "sqls",
 			settings = {},
-		}
+		},
 	},
 }

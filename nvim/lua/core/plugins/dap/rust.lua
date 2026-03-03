@@ -1,6 +1,6 @@
 return {
-	'mrcjkb/rustaceanvim',
-	version = '^5',
+	"mrcjkb/rustaceanvim",
+	version = "^5",
 	lazy = false, -- This plugin is already lazy
 	dependencies = { "williamboman/mason.nvim" },
 	config = function()
@@ -15,5 +15,5 @@ return {
 				adapter = require("rustaceanvim.config").get_codelldb_adapter(codelldb_path, liblldb_path),
 			},
 		}
-	end
+	end,
 }

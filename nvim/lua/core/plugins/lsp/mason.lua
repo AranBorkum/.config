@@ -3,7 +3,7 @@ return {
 		"williamboman/mason.nvim",
 		config = function()
 			require("mason").setup({})
-		end
+		end,
 	},
 	{
 		"WhoIsSethDaniel/mason-tool-installer.nvim",

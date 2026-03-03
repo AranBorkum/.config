@@ -8,12 +8,12 @@ local function setup_lazy()
 			"--filter=blob:none",
 			"--branch=stable",
 			lazyrepo,
-			lazypath
+			lazypath,
 		})
 		if vim.v.shell_error ~= 0 then
 			vim.api.nvim_echo({
 				{ "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-				{ out,                            "WarningMsg" },
+				{ out, "WarningMsg" },
 				{ "\nPress any key to exit..." },
 			}, true, {})
 			vim.fn.getchar()
@@ -25,4 +25,3 @@ end
 
 setup_lazy()
 require("lazy").setup("core.plugins")
-

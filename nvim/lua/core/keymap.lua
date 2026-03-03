@@ -27,7 +27,7 @@ vim.keymap.set("n", "<leader>vt", function()
 		vim.diagnostic.config({ virtual_text = false })
 	else
 		vim.diagnostic.config({
-			virtual_text = { source = true }
+			virtual_text = { source = true },
 		})
 	end
 end)

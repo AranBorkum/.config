@@ -1,3 +1,4 @@
+---@type ToolingConfig
 return {
 	formatters = {},
 	linters = {},
@@ -6,6 +7,6 @@ return {
 		{
 			name = "rust_analyzer",
 			settings = {},
-		}
+		},
 	},
 }

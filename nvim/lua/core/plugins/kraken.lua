@@ -11,13 +11,13 @@ return {
 			"<leader>DD",
 			"<cmd>KDataDogEvent<cr>",
 			desc = "Open event in Datadog",
-		}
+		},
 	},
 	cond = function()
-      -- Check if the current directory contains your specific project path
-      local cwd = vim.fn.getcwd()
-      return cwd:find("kraken%-core") ~= nil
-    end,
+		-- Check if the current directory contains your specific project path
+		local cwd = vim.fn.getcwd()
+		return cwd:find("kraken%-core") ~= nil
+	end,
 	dev = true,
 	lazy = false,
 	opts = {
