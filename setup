@@ -74,6 +74,8 @@ main() {
 	install_brew_and_dependencies
 	create_symlink ~/.config/git/gitconfig.ini ~/.gitconfig
 	create_symlink ~/.config/zsh/zshrc ~/.zshrc
+	create_symlink ~/.config/git/git-comment.sh ~/.local/bin/git-comment
+	create_symlink ~/.config/git/git-description.sh ~/.local/bin/git-description
 	set_wallpaper_and_screen_saver
 
 	source_extra_scripts
