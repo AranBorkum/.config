@@ -11,6 +11,7 @@ export PATH=$PATH:~/.cargo/bin/
 export IDF_PATH=$HOME/esp/esp-idf
 export PATH="$IDF_PATH/tools:$PATH"
 export TMUX_PLUGIN_MANAGER_PATH=$HOME/.config/tmux/plugins
+export TMS_CONFIG_FILE=$HOME/.config/tms/config.toml
 export PATH="$PATH:/Users/aran.borkum/.local/bin"
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

@@ -1,0 +1,11 @@
+[[search_dirs]]
+path = "/Users/aran.borkum/Personal"
+depth = 10
+
+[[search_dirs]]
+path = "/Users/aran.borkum/Kraken"
+depth = 1
+
+[[search_dirs]]
+path = "/Users/aran.borkum/.config"
+depth = 10
