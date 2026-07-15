@@ -6,9 +6,16 @@ return {
 		"nvim-lua/plenary.nvim",
 		"antoinemadec/FixCursorHold.nvim",
 		"nvim-treesitter/nvim-treesitter",
+		"theHamsta/nvim-dap-virtual-text",
 		{
-			"rcarriga/nvim-dap-ui",
-			dependencies = { "nvim-neotest/nvim-nio" },
+			"igorlfs/nvim-dap-view",
+			opts = {
+				winbar = {
+					controls = {
+						enabled = true,
+					},
+				},
+			},
 		},
 	},
 	keys = {
@@ -72,7 +79,7 @@ return {
 		{
 			"<leader>de",
 			function()
-				require("dapui").eval(nil, "repl")
+				require("dap-view").eval(nil, "repl")
 			end,
 			mode = { "n", "v" },
 			desc = "Eval selection",
@@ -101,23 +108,19 @@ return {
 		{
 			"<leader>du",
 			function()
-				require("dapui").toggle()
+				require("dap-view").toggle()
 			end,
 			desc = "Toggle UI",
 		},
 	},
-	opts = { rocks = { enables = false } },
 	config = function()
-		local dap, dapui = require("dap"), require("dapui")
-		dapui.setup()
-		dap.listeners.after.event_initialized["dapui_config"] = function()
-			dapui.open()
-		end
-		dap.listeners.before.event_terminated["dapui_config"] = function()
-			dapui.close()
-		end
-		dap.listeners.before.event_exited["dapui_config"] = function()
-			dapui.close()
-		end
-	end,
+		local dap, dv = require("dap"), require("dap-view")
+
+		dap.listeners.before.attach["dap-view-config"] = function() dv.open() end
+		dap.listeners.before.launch["dap-view-config"] = function() dv.open() end
+		dap.listeners.before.event_terminated["dap-view-config"] = function() dv.close() end
+		dap.listeners.before.event_exited["dap-view-config"] = function() dv.close() end
+
+		require("nvim-dap-virtual-text").setup()
+	end
 }

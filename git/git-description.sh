@@ -9,7 +9,7 @@ git-description() {
   base="$(git default-branch)"
 
   # Get diff from merge-base (correct for PRs)
-  diff_content="$(git diff "$base"...HEAD)"
+  diff_content="$(git diff origin/$base)"
 
   if [[ -z "$diff_content" ]]; then
     echo "No diff found against $base."

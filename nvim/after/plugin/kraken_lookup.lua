@@ -18,6 +18,13 @@ local function open_closest_match_split()
 		return
 	end
 
+	local translation_tag = str:match(":(.+)")
+	if translation_tag then
+		found = translation_tag
+	end
+
+	print("Found string" .. found)
+
 	-- Directory to search in
 	local search_dir = "src/octoenergy/plugins/common/i18n/locales/"
 

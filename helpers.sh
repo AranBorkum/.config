@@ -46,9 +46,14 @@ create_symlink() {
         return 1
     fi
 
-    if ! [[ -L "$LINK_NAME" ]]; then
-        ln -s "$TARGET" "$LINK_NAME"
+    # Check if symlink or directory already exists
+    if [[ -L "$LINK_NAME" || -d "$LINK_NAME" ]]; then
+        print_status "$TAG" 0
+        return 0
     fi
+
+    # Create the symlink if it doesn't exist
+    ln -s "$TARGET" "$LINK_NAME"
 
     print_status "$TAG" "$?"
 }

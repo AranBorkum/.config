@@ -1,0 +1,14 @@
+# presenterm configuration for terminal-tech-presentations
+# See: https://mfontanini.github.io/presenterm/guides/settings.html
+
+mermaid:
+  # Point to the puppeteer config to fix AppArmor user namespace restrictions
+  # on Ubuntu 23.10+. See puppeteer-config.json for details.
+  puppeteer_config_path: ./puppeteer-config.json
+
+defaults:
+  # Uncomment to set a default theme
+  # theme: light
+
+  # Uncomment to limit presentation width
+  # max_columns: 100

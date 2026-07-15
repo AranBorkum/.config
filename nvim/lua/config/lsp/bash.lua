@@ -1,7 +1,7 @@
 ---@type ToolingConfig
 return {
-	formatters = {},
-	linters = {},
+	formatters = { "shfmt" },
+	linters = { "shellcheck" },
 	debuggers = {},
 	lsp_servers = {
 		{

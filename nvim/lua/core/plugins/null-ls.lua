@@ -10,6 +10,7 @@ return {
 		null_ls.setup({
 			debug = true,
 			sources = {
+				null_ls.builtins.formatting.prettier,
 				-- Import Ruff from extras
 				require("none-ls.diagnostics.ruff"),
 				require("none-ls.formatting.ruff").with({

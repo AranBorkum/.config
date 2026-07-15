@@ -1,9 +1,6 @@
-local neotest_python = require("neotest-python")
-local pytest_args = vim.g.test_cmd or { "-vv" }
-
-return neotest_python({
+return require("neotest-python")({
 	dap = { justMyCode = true, django = true },
-	args = pytest_args,
+	args = vim.g.test_cmd or { "-vv" },
 	runner = "pytest",
 	python = ".venv/bin/python",
 })

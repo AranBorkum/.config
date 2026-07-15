@@ -1,6 +1,6 @@
 ---@type ToolingConfig
 return {
-	formatters = {},
+	formatters = { "stylua" },
 	linters = {},
 	debuggers = {},
 	lsp_servers = {

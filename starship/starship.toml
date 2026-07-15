@@ -1,6 +1,6 @@
 # Get editor completions based on the config schema
 "$schema" = 'https://starship.rs/config-schema.json'
-format = """$directory$git_branch$git_status$fill$all$character
+format = """$directory$kubernetes$git_branch$git_status$fill$all$character
 """
 palette = "catppuccin_mocha"
 command_timeout = 1000
@@ -34,6 +34,10 @@ style = "bold purple"
 disabled = true
 format = '([\[$all_status$ahead_behind\]]($style)) '
 style = 'bold yellow'
+
+[kubernetes]
+disabled = false
+format = '[\($context(::$namespace)\)](bold blue) '
 
 # Customize individual symbols
 conflicted = "⚔️ "

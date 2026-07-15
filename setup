@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+CURRENT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 EXTRA_SCRIPTS=""
 
 source "$CURRENT_DIR/helpers.sh"
 
 usage() {
-    cat <<EOF
+	cat <<EOF
 Usage: $(basename "$0") [OPTIONS]
 
 Sets up your environment with wallpapers, screen saver, and other tools.
@@ -21,43 +21,43 @@ EOF
 }
 
 parse_args() {
-    while [[ $# -gt 0 ]]; do
-        case "$1" in
-            --extra)
-                EXTRA_SCRIPTS="$2"
-                shift 2
-                ;;
-            -h|--help)
-                usage
-                exit 0
-                ;;
-            *)
-                echo "Unknown option: $1"
-                echo
-                usage
-                exit 1
-                ;;
-        esac
-    done
+	while [[ $# -gt 0 ]]; do
+		case "$1" in
+		--extra)
+			EXTRA_SCRIPTS="$2"
+			shift 2
+			;;
+		-h | --help)
+			usage
+			exit 0
+			;;
+		*)
+			echo "Unknown option: $1"
+			echo
+			usage
+			exit 1
+			;;
+		esac
+	done
 }
 
 source_extra_scripts() {
-    if [[ -n "$EXTRA_SCRIPTS" ]]; then
-        IFS=',' read -ra SCRIPTS <<< "$EXTRA_SCRIPTS"
-        for script in "${SCRIPTS[@]}"; do
-            if [[ -f "$script" ]]; then
-                source "$script"
-            else
-                echo "Warning: Extra script '$script' not found"
-            fi
-        done
-    fi
+	if [[ -n "$EXTRA_SCRIPTS" ]]; then
+		IFS=',' read -ra SCRIPTS <<<"$EXTRA_SCRIPTS"
+		for script in "${SCRIPTS[@]}"; do
+			if [[ -f "$script" ]]; then
+				source "$script"
+			else
+				echo "Warning: Extra script '$script' not found"
+			fi
+		done
+	fi
 }
 
 set_wallpaper_and_screen_saver() {
-    local TAG="Setting background and screen saver"
+	local TAG="Setting background and screen saver"
 
-    echo -n "● $TAG"
+	echo -n "● $TAG"
 
 	osascript -e 'tell application "System Events" to set picture of every desktop to "~/.config/images/Octocat/Octocat big brother background.png"'
 
@@ -65,17 +65,25 @@ set_wallpaper_and_screen_saver() {
 	defaults -currentHost write com.apple.screensaver photoPath "~/.config/images/Octocat"
 	killall cfprefsd
 
-    print_status "$TAG" "$?"
+	print_status "$TAG" "$?"
 }
 
 main() {
 	parse_args "$@"
 
 	install_brew_and_dependencies
+	xattr -dr com.apple.quarantine /Applications/Alacritty.app
 	create_symlink ~/.config/git/gitconfig.ini ~/.gitconfig
 	create_symlink ~/.config/zsh/zshrc ~/.zshrc
 	create_symlink ~/.config/git/git-comment.sh ~/.local/bin/git-comment
 	create_symlink ~/.config/git/git-description.sh ~/.local/bin/git-description
+	create_symlink ~/.config/git/git-krak.sh ~/.local/bin/git-krak
+	create_symlink ~/.config/git/git-remote-rebase.sh ~/.local/bin/git-remote-rebase
+	create_symlink ~/.config/git/git-worktree-create.sh ~/.local/bin/git-worktree-create
+	create_symlink ~/.config/git/git-update.sh ~/.local/bin/git-update
+	create_symlink ~/.config/git/git-irebase.sh ~/.local/bin/git-irebase
+	create_symlink ~/.config/git/git-fixup.sh ~/.local/bin/git-fixup
+	create_symlink ~/.config/navi/ ~/.local/share/
 	set_wallpaper_and_screen_saver
 
 	source_extra_scripts

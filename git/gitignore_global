@@ -1,4 +1,5 @@
-mprocs/
+**/mprocs/
+**/mprocs
 mprocs.yaml
 mprocs.log
 .idea/
@@ -13,3 +14,6 @@ wip/
 *.diff
 .aliases
 spike/
+**/scratch/
+
+**/.claude/settings.local.json

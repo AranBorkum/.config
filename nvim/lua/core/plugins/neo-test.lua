@@ -5,6 +5,7 @@ return {
 		"nvim-lua/plenary.nvim",
 		"nvim-treesitter/nvim-treesitter",
 		"nvim-neotest/neotest-python",
+		"nvim-neotest/neotest-plenary",
 		"mfussenegger/nvim-dap",
 		"mrcjkb/rustaceanvim",
 	},
@@ -96,21 +97,8 @@ return {
 		},
 	},
 	config = function()
-		local neotest = require("neotest")
-		local neotest_python = require("neotest-python")
-		local neotest_rust = require("rustaceanvim.neotest")
-		local pytest_args = vim.g.test_cmd or { "-vv" }
-
-		neotest.setup({
-			adapters = {
-				neotest_python({
-					dap = { justMyCode = true, django = true },
-					args = pytest_args,
-					runner = "pytest",
-					python = ".venv/bin/python",
-				}),
-				neotest_rust({}),
-			},
+		require("neotest").setup({
+			adapters = vim.tbl_values(require("config.test")),
 			output = { open_on_run = true },
 			discovery = {
 				enabled = false,

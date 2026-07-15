@@ -1,16 +1,11 @@
 return {
 	"octoenergy/kraken.nvim",
-	branch = "get-translation",
+	-- branch = "add-paste-import-statement-command",
 	keys = {
 		{
 			"<leader>lt",
 			"<cmd>KLocateTests<cr>",
 			desc = "Locate test file(s)",
-		},
-		{
-			"<leader>DD",
-			"<cmd>KDataDogEvent<cr>",
-			desc = "Open event in Datadog",
 		},
 	},
 	cond = function()
@@ -18,13 +13,11 @@ return {
 		local cwd = vim.fn.getcwd()
 		return cwd:find("kraken%-core") ~= nil
 	end,
-	dev = true,
 	lazy = false,
 	opts = {
 		commands = {
 			locate_tests = {
 				open_command = "lefta vsp",
-				picker = "snacks",
 			},
 		},
 	},

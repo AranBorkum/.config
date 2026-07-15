@@ -1,0 +1,96 @@
+
+% kraken
+
+# Start Django shell_plus (with replica)
+./scripts/kraken-inv --shell --client <kraken_client_lower>
+
+# Start Django shell_plus (with local data)
+inv localdev.manage shell_plus --client <kraken_client_lower>
+
+# Start Django shell_plus with debugger
+DJANGO_CONFIGURATION=<django_config> DATABASE_NAME=<kraken_client_lower>-<kraken_env>.krakencore DATABASE_PORT=5430 python -m debugpy --listen 5678 --wait-for-client src/manage.py shell_plus
+
+# Start Support Site with debugger
+DJANGO_CONFIGURATION=<django_config> python -m debugpy --listen 5678 --wait-for-client src/manage.py runserver
+
+# Set DJANGO_CONFIGURATION
+export DJANGO_CONFIGURATION=<django_config>
+
+$ django_config: sg --lang python -p 'class $NAME' ./src/octoenergy/settings/configuration/ --json | jq -r '.[].metaVariables.single.NAME.text'
+
+# Set local DB credential
+export DATABASE_USER=postgres
+export DATABASE_HOST=localhost
+export DATABASE_REPLICA_HOST=localhost
+export DATABASE_PASSWORD=""
+export DATABASE_NAME=<kraken_client_lower>-consumer
+export DATABASE_CONSUMPTION_NAME=<kraken_client_lower>-consumption
+export DATABASE_INK_NAME=<kraken_client_lower>-ink
+export DATABASE_MESSAGING_NAME=<kraken_client_lower>-messaging
+export DATABASE_VOICE_NAME=<kraken_client_lower>-voice
+
+# Start kraken-db
+kraken-db $(echo <kraken_client> | tr '[:upper:]' '[:lower:]')
+
+$ kraken_client_lower: echo <kraken_client> | tr '[:upper:]' '[:lower:]'
+$ kraken_client: cat "./client_codes.txt"
+$ kraken_env: echo 'prod test' | tr ' ' '\n'
+
+# Run local test
+inv localdev.pytest <test_files>
+
+# Run mypy
+inv run-python-type-checker -t <py_files>
+
+$ test_files: fd "^test_.*\.py$"
+$ py_files: fd -e py
+
+# Create new debt-tracking branch
+git checkout -b debt-tracking.<name>
+
+# Connect to DB using pgcli
+pgcli -h $DATABASE_HOST -u $DATABASE_USER -d $DATABASE_NAME
+
+# Show migration for debt tracking
+DJANGO_CONFIGURATION=<django_config> src/manage.py showmigrations debt_tracking
+
+# Apply migration
+DJANGO_CONFIGURATION=<django_config> src/manage.py migrate debt_tracking <number>
+
+# Make migration
+inv localdev.makemigrations --client=<kraken_client>
+
+# Run support site with production replica
+./scripts/kraken-inv --client=<kraken_client_lower> --site support -- --port=8080
+
+# Run support site with production replica (v2)
+./scripts/kraken-inv --client <kraken_client_lower> supportsite.run -- --no-eager-install-deps
+
+# Spin up JupyterLab
+./scripts/kraken-inv --client=<kraken_client_lower> --notebook
+
+# Rebase to working master
+git rebase -i $(inv circleci.get-latest-passing-master)
+
+# Connect to krakencore with ktdb + pgcli
+ktdb connect <profile>.krakencore
+
+$ profile: basename -s .json $HOME/.config/ktdb/connections/*.json
+
+# Run support site with local database
+inv supportsite.run --client=<kraken_client_lower> -j --no-eager-install-deps
+
+# Setup new client (DB)
+inv localdev.setup-new-client --client=<kraken_client_lower>
+
+# Re-generate DB config
+kraken db generate-db-config
+
+# Re-generate AWS config
+kraken cf generate-aws-config --overwrite-profiles
+
+# Start DB proxy
+ktdb proxy
+
+# Connect to DB Proxy
+pgcli -d <kraken_client_lower>-<kraken_env>.krakencore -p 5430 -h localhost

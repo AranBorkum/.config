@@ -1,143 +1,102 @@
 return {
-	"nvim-treesitter/nvim-treesitter",
-	build = ":TSUpdate",
-	branch = "master",
-	event = { "BufReadPost", "BufNewFile" },
-	dependencies = {
-		"nvim-treesitter/nvim-treesitter-textobjects",
-		"windwp/nvim-ts-autotag",
-		"RRethy/nvim-treesitter-endwise",
-		"theHamsta/nvim-dap-virtual-text",
-	},
-	opts = {
-		highlight = { enable = true },
-		indent = { enable = true },
-		ensure_installed = {
-			"bash",
-			"html",
-			"javascript",
-			"json",
-			"jsonc",
-			"lua",
-			"markdown",
-			"markdown_inline",
-			"python",
-			"regex",
-			"rust",
-			"scala",
-			"sql",
-			"terraform",
-			"toml",
-			"tsx",
-			"typescript",
-			"typescript",
-			"vim",
-			"vimdoc",
-			"yaml",
+	{
+		"nvim-treesitter/nvim-treesitter",
+		build = ":TSUpdate",
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter-textobjects",
+			"windwp/nvim-ts-autotag",
+			"RRethy/nvim-treesitter-endwise",
 		},
-		incremental_selection = {
-			enable = true,
-			keymaps = {
-				init_selection = "<cr>",
-				scope_incremental = "<cr>",
-				node_incremental = "<tab>",
-				node_decremental = "<s-tab>",
-			},
-		},
-		endwise = {
-			enable = true,
-		},
-		textobjects = {
-			select = {
-				enable = true,
-				lookahead = true,
-				keymaps = {
-					["am"] = "@function.outer",
-					["im"] = "@function.inner",
-					["a["] = "@class.outer",
-					["i["] = "@class.inner",
-					["ac"] = "@conditional.outer",
-					["ic"] = "@conditional.inner",
-					["al"] = "@loop.outer",
-					["il"] = "@loop.inner",
-					["ib"] = "@block.inner",
-					["ab"] = "@block.outer",
-					["ir"] = "@parameter.inner",
-					["ar"] = "@parameter.outer",
-					["it"] = "@return_type",
-					["at"] = "@return_type.outer",
-					["a="] = "@assignment.outer",
-					["i="] = "@assignment.inner",
-					["l="] = "@assignment.lhs",
-					["r="] = "@assignment.rhs",
-					["af"] = "@call.outer",
-					["if"] = "@call.inner",
-				},
-			},
-			swap = {
-				enable = true,
-				swap_next = {
-					["<leader>na"] = "@parameter.inner",
-					["<leader>nm"] = "@function.outer",
-				},
-				swap_previous = {
-					["<leader>pa"] = "@parameter.inner",
-					["<leader>pm"] = "@function.outer",
-				},
-			},
-			move = {
-				enable = true,
-				set_jumps = true,
-				goto_next_start = {
-					["]m"] = "@function.outer",
-					["]]"] = "@class.outer",
-					["]f"] = "@call.name",
-				},
-				goto_next_end = {
-					["]M"] = "@function.outer",
-					["]["] = "@class.outer",
-					["]t"] = "@return_type",
-				},
-				goto_previous_start = {
-					["[m"] = "@function.outer",
-					["[["] = "@class.outer",
-					["[f"] = "@call.name",
-				},
-				goto_previous_end = {
-					["[M"] = "@function.outer",
-					["[]"] = "@class.outer",
-					["[t"] = "@return_type",
-					["[i"] = "@import_statement",
-				},
-				goto_next = {
-					-- ["]c"] = "@conditional.outer",
-					-- ["]r"] = "@function.return_type",
-				},
-				goto_previous = {
-					-- ["[c"] = "@conditional.outer",
-					-- ["[r"] = "@function.return_type",
-				},
-			},
-		},
-	},
-	config = function(_, opts)
-		if type(opts.ensure_installed) == "table" then
-			---@type table<string, boolean>
-			local added = {}
-			opts.ensure_installed = vim.tbl_filter(function(lang)
-				if added[lang] then
-					return false
+		config = function()
+			local nvim_treesitter = require("nvim-treesitter")
+			nvim_treesitter.setup {
+				install_dir = vim.fn.stdpath('data') .. '/site'
+			}
+
+			local parsers = {
+				"bash",
+				"helm",
+				"html",
+				"javascript",
+				"json",
+				"jsonc",
+				"lua",
+				"markdown",
+				"markdown_inline",
+				"python",
+				"regex",
+				"rust",
+				"scala",
+				"sql",
+				"terraform",
+				"toml",
+				"tsx",
+				"typescript",
+				"typescript",
+				"vim",
+				"vimdoc",
+				"yaml",
+			}
+
+			local patterns = {}
+			for _, parser in ipairs(parsers) do
+				nvim_treesitter.install(parser)
+				local parse_patterns = vim.treesitter.language.get_filetypes(parser)
+				for _, pp in ipairs(parse_patterns) do
+					table.insert(patterns, pp)
 				end
-				added[lang] = true
-				return true
-			end, opts.ensure_installed)
+			end
+
+			vim.wo[0][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+			vim.wo[0][0].foldmethod = 'expr'
+
+			vim.api.nvim_create_autocmd('FileType', {
+				pattern = patterns,
+				callback = function()
+					vim.treesitter.start()
+				end,
+			})
+
+			local ts_move = require("nvim-treesitter-textobjects.move")
+			local function map_move(keymaps, func, desc_prefix)
+				for key, query in pairs(keymaps) do
+					vim.keymap.set({ "n", "x", "o" }, key, function()
+						-- The second argument "textobjects" tells Treesitter which query group to use
+						func(query, "textobjects")
+					end, { desc = desc_prefix .. " " .. query })
+				end
+			end
+
+			map_move({
+				["]m"] = "@function.outer",
+				["]]"] = "@class.outer",
+				["]f"] = "@call.name",
+			}, ts_move.goto_next_start, "Next start")
+
+			map_move({
+				["]M"] = "@function.outer",
+				["]["] = "@class.outer",
+				["]t"] = "@return_type",
+			}, ts_move.goto_next_end, "Next end")
+
+			map_move({
+				["[m"] = "@function.outer",
+				["[["] = "@class.outer",
+				["[f"] = "@call.name",
+			}, ts_move.goto_previous_start, "Prev start")
+
+			map_move({
+				["[M"] = "@function.outer",
+				["[]"] = "@class.outer",
+				["[t"] = "@return_type",
+				["[i"] = "@import_statement",
+			}, ts_move.goto_previous_end, "Prev end")
+
+			require("nvim-ts-autotag").setup({
+				aliases = {
+					htmldjango = "html",
+				},
+			})
 		end
-		require("nvim-treesitter.configs").setup(opts)
-		require("nvim-ts-autotag").setup({
-			aliases = {
-				htmldjango = "html",
-			},
-		})
-		-- require("nvim-dap-virtual-text").setup()
-	end,
+	}
 }
